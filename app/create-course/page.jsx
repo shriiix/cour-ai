@@ -2,6 +2,9 @@
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react'
 import { HiMiniSquares2X2, HiLightBulb, HiMiniAdjustmentsHorizontal } from "react-icons/hi2";
+import SelectCategory from './_components/SelectCategory';
+import TopicDescription from './_components/TopicDescription';
+import SelectOption from './_components/SelectOption';
 
 
 function CreateCourse() {
@@ -52,14 +55,20 @@ function CreateCourse() {
                     ))}
                 </div>
             </div>
-
         </div>
+        <div></div>
 
-        {/*Component*/}
+        <div className='px-10 md:px-20 lg:px-44 mt-10' >
+
+        {/*Component*/} 
+           {activeIndex==0?<SelectCategory/>:activeIndex==1?<TopicDescription/>:<SelectOption/>}
 
         {/*Next previous button*/}
-        <div>
-          <Button onClick={()=> setActiveIndex(activeIndex+1)} >Next</Button>
+        <div className='flex justify-between mt-10'>
+          <Button disabled ={activeIndex==0} onClick={()=>setActiveIndex(activeIndex-1)}>Previous </Button>
+          {activeIndex<2&&<Button onClick={()=> setActiveIndex(activeIndex+1)} >Next</Button>}
+         {activeIndex==2&&<Button onClick={()=> setActiveIndex(activeIndex+1)} >Generate Couse </Button>}                  
+        </div>
         </div>
 
     </div>
