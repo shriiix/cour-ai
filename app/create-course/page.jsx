@@ -1,10 +1,11 @@
 "use client"
 import { Button } from '@/components/ui/button';
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HiMiniSquares2X2, HiLightBulb, HiMiniAdjustmentsHorizontal } from "react-icons/hi2";
 import SelectCategory from './_components/SelectCategory';
 import TopicDescription from './_components/TopicDescription';
 import SelectOption from './_components/SelectOption';
+import { UserInputContext } from '../_context/UserInputContext';
 
 
 function CreateCourse() {
@@ -29,7 +30,14 @@ function CreateCourse() {
     }
   ]
   const [activeIndex ,setActiveIndex ]= useState(0);
-  
+  const{userCourseInput,setUserCourseInput}=useContext(UserInputContext);
+
+
+  useEffect(()=>{
+
+    console.log(userCourseInput)
+  },[userCourseInput])
+
   return (
      
     <div>
@@ -70,7 +78,6 @@ function CreateCourse() {
          {activeIndex==2&&<Button onClick={()=> setActiveIndex(activeIndex+1)} >Generate Couse </Button>}                  
         </div>
         </div>
-
     </div>
   )
 }

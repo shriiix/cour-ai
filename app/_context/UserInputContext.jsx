@@ -1,9 +1,3 @@
-import React from 'react'
+import { createContext } from "react";
 
-function UserInputContext() {
-  return (
-    <div>UserInputContext</div>
-  )
-}
-
-export default UserInputContext
+export const UserInputContext = createContext();

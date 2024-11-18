@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 
 function SelectOption() {
     return (
-        <div className='px-10 md:px-20 lg:px-44 py-10'>
+        <div className='px-10 md:px-20 lg:px-44 py-3'>
             <div className='grid grid-cols-2 gap-10'>
                 <div >
                     <div>
