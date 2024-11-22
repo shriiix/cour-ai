@@ -27,8 +27,7 @@ function SelectCategory() {
                 <div className='py-3 font-serif'>
                     <h2>{item.name}</h2>
                 </div>
-            </div>
-          
+            </div>          
         ))}
     </div>
     </div>

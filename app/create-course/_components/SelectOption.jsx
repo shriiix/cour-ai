@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
     Select,
@@ -8,8 +8,20 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Input } from '@/components/ui/input'
+import { UserInputContext } from '@/app/_context/UserInputContext';
 
 function SelectOption() {
+
+    const{userCourseInput,setUserCourseInput}=useContext(UserInputContext);
+    const handleInputChange=(fileName,value )=>{
+        setUserCourseInput(prev=>({
+            ...prev,
+            [fileName]:value
+    }))
+
+  }
+
+
     return (
         <div className='px-10 md:px-20 lg:px-44 py-3'>
             <div className='grid grid-cols-2 gap-10'>
@@ -17,7 +29,8 @@ function SelectOption() {
                     <div>
                         <label >Difficulty Level</label>
                     </div >
-                    <Select>
+                    <Select onValueChange={(value)=>handleInputChange('level',value)}
+                        defaultValue={userCourseInput.level}> 
                         <SelectTrigger className="">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
@@ -32,7 +45,8 @@ function SelectOption() {
                     <div>
                         <label >Course Duration</label>
                     </div >
-                    <Select>
+                    <Select onValueChange={(value)=>handleInputChange('Time',value)}
+                        defaultValue={userCourseInput.Time}>
                         <SelectTrigger className="">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
@@ -47,7 +61,8 @@ function SelectOption() {
                     <div>
                         <label >Add Video</label>
                     </div >
-                    <Select>
+                    <Select onValueChange={(value)=>handleInputChange('Video',value)}
+                        defaultValue={userCourseInput.Video}>
                         <SelectTrigger className="">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
@@ -62,7 +77,9 @@ function SelectOption() {
                     <div>
                         <label >Number Chapter</label>
                     </div >
-                    <Input type="Number"/>
+                    <Input type="Number" className=" h-14 text-lg"
+                    onChange={(event)=>handleInputChange('NumberOfChapter',event.target.value)}
+                    defaultValue={userCourseInput.NumberOfChapter}/>
                 </div>
             </div>
         </div>
