@@ -6,9 +6,13 @@ import SelectCategory from './_components/SelectCategory';
 import TopicDescription from './_components/TopicDescription';
 import SelectOption from './_components/SelectOption';
 import { UserInputContext } from '../_context/UserInputContext';
+import { GenerateCourseLayout_AI } from '@/configs/AiModel';
+import LoadingDialog from '../dashboard/_components/LoadingDialog';
 
 
 function CreateCourse() {
+
+  const [loading, setLoading ] = useState(false);
   
   const StepperOptions =[
     {
@@ -64,6 +68,18 @@ function CreateCourse() {
     return false;
   }
 
+  const GenerateCourseLayout = async()=>{
+    setLoading(true)
+    const BASIC_PROMPT = 'Generate A Course Tutorial on Following Detail With field Course Name, Description, Along with Chapter Name, about, Duration'
+    const USER_INPUT_PROMPT = 'Category:'+userCourseInput?.category+', Topic:'+userCourseInput?.topic+ ', Level:'+userCourseInput?.level+', Duration:'+userCourseInput?.Time+', NoOf. Chapters:'+userCourseInput?.NumberOfChapter+', in JSON format'
+    const FINAL_PROMPT = BASIC_PROMPT+ USER_INPUT_PROMPT
+    console.log(FINAL_PROMPT);
+    const result = await GenerateCourseLayout_AI.sendMessage(FINAL_PROMPT)
+    console.log(result.response?.text());
+    console.log(JSON.parse(result.response?.text()));
+    setLoading(false)
+  }
+
   return (
      
     <div>
@@ -101,9 +117,10 @@ function CreateCourse() {
         <div className='flex justify-between mt-10'>
           <Button disabled ={activeIndex==0} onClick={()=>setActiveIndex(activeIndex-1)}>Previous </Button>
           {activeIndex<2&&<Button disabled={CheckStatus()}  onClick={()=> setActiveIndex(activeIndex+1)} >Next</Button>}
-         {activeIndex==2&&<Button disabled={CheckStatus()} onClick={()=> setActiveIndex(activeIndex+1)} >Generate Couse </Button>}                  
+         {activeIndex==2&&<Button disabled={CheckStatus()} onClick={()=> GenerateCourseLayout()} >Generate Couse </Button>}                  
         </div>
         </div>
+        <LoadingDialog loading={loading}/>
     </div>
   )
 }
