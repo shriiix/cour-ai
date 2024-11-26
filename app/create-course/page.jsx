@@ -38,6 +38,32 @@ function CreateCourse() {
     console.log(userCourseInput)
   },[userCourseInput])
 
+  const CheckStatus=()=>{
+    if(userCourseInput?.length==0){
+      return true;
+    }
+    else if(activeIndex==0 &&(userCourseInput?.category?.length==0 || userCourseInput?.category==undefined)){
+      return true;
+    }
+    if(activeIndex==1&&(userCourseInput?.topic?.length==0 || userCourseInput?.topic==undefined)){
+      return true;
+    }
+    else if(activeIndex==2 &&(userCourseInput?.level?.length==0 || userCourseInput?.level==undefined)){
+      return true;
+    }
+    else if(activeIndex==2 &&(userCourseInput?.Time?.length==0 || userCourseInput?.Time==undefined)){
+      return true;
+    }
+    else if(activeIndex==2 &&(userCourseInput?.Video?.length==0 || userCourseInput?.Video==undefined)){
+      return true;
+    }
+    else if(activeIndex==2 &&(userCourseInput?.NumberOfChapter?.length==0 || userCourseInput?.NumberOfChapter==undefined)){
+      return true;
+    }
+
+    return false;
+  }
+
   return (
      
     <div>
@@ -74,8 +100,8 @@ function CreateCourse() {
         {/*Next previous button*/}
         <div className='flex justify-between mt-10'>
           <Button disabled ={activeIndex==0} onClick={()=>setActiveIndex(activeIndex-1)}>Previous </Button>
-          {activeIndex<2&&<Button onClick={()=> setActiveIndex(activeIndex+1)} >Next</Button>}
-         {activeIndex==2&&<Button onClick={()=> setActiveIndex(activeIndex+1)} >Generate Couse </Button>}                  
+          {activeIndex<2&&<Button disabled={CheckStatus()}  onClick={()=> setActiveIndex(activeIndex+1)} >Next</Button>}
+         {activeIndex==2&&<Button disabled={CheckStatus()} onClick={()=> setActiveIndex(activeIndex+1)} >Generate Couse </Button>}                  
         </div>
         </div>
     </div>
