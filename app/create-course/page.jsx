@@ -13,6 +13,7 @@ import { CourseList } from '@/configs/schema';
 import { uuid } from 'drizzle-orm/pg-core';
 import uuid4 from 'uuid4';
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 
 function CreateCourse() {
@@ -41,6 +42,7 @@ function CreateCourse() {
   const [activeIndex ,setActiveIndex ]= useState(0);
   const{userCourseInput,setUserCourseInput}=useContext(UserInputContext);
   const {user}= useUser();
+  const router = useRouter();
 
   useEffect(()=>{
 
@@ -101,6 +103,7 @@ function CreateCourse() {
     })
     console.log("Finished");
     setLoading(false);
+    router.replace('/create-course/'+id)
   }
 
   return (

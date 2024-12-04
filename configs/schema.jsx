@@ -14,4 +14,9 @@ export const CourseList=pgTable('courseList', {
     userProfileImage:varchar('userProfileImage'),
     //courseBanner:varchar('courseBanner').default('/course-cover.svg'),
     //publish:boolean('publish').default(false)
-})
+}
+
+
+
+
+)
