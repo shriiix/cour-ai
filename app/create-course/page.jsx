@@ -8,6 +8,11 @@ import SelectOption from './_components/SelectOption';
 import { UserInputContext } from '../_context/UserInputContext';
 import { GenerateCourseLayout_AI } from '@/configs/AiModel';
 import LoadingDialog from '../dashboard/_components/LoadingDialog';
+import { db } from '@/configs/db';
+import { CourseList } from '@/configs/schema';
+import { uuid } from 'drizzle-orm/pg-core';
+import uuid4 from 'uuid4';
+import { useUser } from '@clerk/nextjs';
 
 
 function CreateCourse() {
@@ -35,7 +40,7 @@ function CreateCourse() {
   ]
   const [activeIndex ,setActiveIndex ]= useState(0);
   const{userCourseInput,setUserCourseInput}=useContext(UserInputContext);
-
+  const {user}= useUser();
 
   useEffect(()=>{
 
@@ -77,7 +82,25 @@ function CreateCourse() {
     const result = await GenerateCourseLayout_AI.sendMessage(FINAL_PROMPT)
     console.log(result.response?.text());
     console.log(JSON.parse(result.response?.text()));
-    setLoading(false)
+    setLoading(false);
+    SaveCourseLayoutInDb(JSON.parse(result.response?.text()));
+  }
+
+  const SaveCourseLayoutInDb=async(courseList)=>{
+    var id = uuid4();
+    const result = await db.insert(CourseList).values({
+      courseId:id,
+      name: userCourseInput?.topic,
+      level: userCourseInput?.level,
+      category:userCourseInput?.category,
+      courseOutput:courseList,
+      createdBy:user?.primaryEmailAddress?.emailAddress,
+      userName:user?.fullName,
+      userProfileImage:user?.imageUrl
+      
+    })
+    console.log("Finished");
+    setLoading(false);
   }
 
   return (
