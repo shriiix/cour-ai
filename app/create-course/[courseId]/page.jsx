@@ -5,6 +5,7 @@ import { CourseList } from "@/configs/schema";
 import { useUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
+import CourseBasicInfo from "./_components/CourseBasicInfo";
 
 function CourseLayout({ params }) {
   const { user } = useUser(); // Fetch user data
@@ -33,7 +34,12 @@ function CourseLayout({ params }) {
 
   // Render the course or a loading state
       return (
-        <div>CourseLayout</div>
+        <div className="mt-10 px-7 md:px-20 lg:px-44">
+          <h2 className="font-bold text-center text-2xl"> Course Layout </h2>
+          <CourseBasicInfo course={course}/>
+
+
+        </div>
     )
 }
 
