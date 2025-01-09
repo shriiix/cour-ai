@@ -7,7 +7,7 @@ function ChapterList({course}) {
         <h2> Chapter: </h2>
         <div className=' mt-2'>
                {course?.courseOutput?.chapters.map((chapters,index)=>(
-                <div className='border p-5 rounded-lg mb-2 flex items-end justify-between '>
+                <div  key={index} className='border p-5 rounded-lg mb-2 flex items-end justify-between '>
                        <div key={index} className='flex gap-5 items-center mt-5' >
                            <h2 className='bg-primary flex-none h-10 w-10 text-white rounded-full text-center p-2' >{index + 1}</h2>
                            <div>

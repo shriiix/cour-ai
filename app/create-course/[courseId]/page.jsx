@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import CourseBasicInfo from "./_components/CourseBasicInfo";
 import CourseDetail from "./_components/CourseDetail";
 import ChapterList from "./_components/ChapterList";
+import { cidr } from "drizzle-orm/pg-core";
 
 function CourseLayout({ params }) {
   const { user } = useUser(); // Fetch user data
@@ -41,6 +42,7 @@ function CourseLayout({ params }) {
           <CourseBasicInfo course={course}/>
           <CourseDetail course={course} />
           <ChapterList course={course}/>
+          
 
         </div>
     )
