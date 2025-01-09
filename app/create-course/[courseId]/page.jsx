@@ -7,6 +7,7 @@ import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import CourseBasicInfo from "./_components/CourseBasicInfo";
 import CourseDetail from "./_components/CourseDetail";
+import ChapterList from "./_components/ChapterList";
 
 function CourseLayout({ params }) {
   const { user } = useUser(); // Fetch user data
@@ -39,7 +40,7 @@ function CourseLayout({ params }) {
           <h2 className="font-bold text-center text-2xl"> Course Layout </h2>
           <CourseBasicInfo course={course}/>
           <CourseDetail course={course} />
-
+          <ChapterList course={course}/>
 
         </div>
     )

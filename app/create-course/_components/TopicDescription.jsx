@@ -29,8 +29,7 @@ function TopicDescription() {
               defaultValue={userCourseInput?.description}
               onChange={(e)=> handleInputChange('description',e.target.value)}
             />
-        </div>
-        
+        </div>        
     </div>
   )
 }
